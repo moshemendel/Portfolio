@@ -23,6 +23,26 @@ class BSTree():
             else:
                 self.rigth_node = BSTree(value)
 
+    def delete(self, value):
+        if not self.value:
+            return
+        if self.value == value:
+            if self.left_node and self.rigth_node:
+                if self.left_node.value > self.rigth_node.value:
+                    self.value = self.left_node.value
+                    self.left_node = self.left_node.left_node
+                else:
+                    self.value = self.rigth_node.value
+                    self.rigth_node = self.rigth_node.rigth_node
+            elif self.left_node:
+                self.value = self.left_node.value
+                self.left_node = self.left_node.left_node
+            elif self.rigth_node:
+                self.value = self.rigth_node.value
+                self.rigth_node = self.rigth_node.rigth_node
+        elif value < self.value:
+            if self.left_node:
+                self.left_node.delete(value)
     def inorder(self):
         tree = []
         if self.left_node:
